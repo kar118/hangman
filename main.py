@@ -14,7 +14,7 @@ class Game(object):
     BLACK = (0, 0, 0)
 
     # Fonts
-    # LETTER_FONT = pygame.font.SysFont("Consolas", 20)
+    LETTER_FONT = None
 
     def __init__(self):
         self.WIDTH = 800
@@ -58,8 +58,8 @@ class Game(object):
 
         for letter in self.letters:
             x, y, ltr = letter
-            # text = self.LETTER_FONT.render(ltr, 1, self.BLACK)
-            # self.screen.blit(text, (x - round(text.get_width() / 2), y - round(text.get_height() / 2)))
+            text = self.LETTER_FONT.render(ltr, 1, self.BLACK)
+            self.screen.blit(text, (x - round(text.get_width() / 2), y - round(text.get_height() / 2)))
             pygame.draw.circle(self.screen, self.BLACK, (x, y), self.RADIUS, 1)
 
         pygame.display.update()
@@ -70,6 +70,7 @@ class Game(object):
             self.images.append(image)
 
     def loadLetters(self):
+        self.LETTER_FONT = pygame.font.SysFont("Consolas", 20)
         letter_x = round(((self.WIDTH - (self.NUM_OF_LETTERS / 2) * (2 * self.RADIUS + self.GAP)) + self.RADIUS) / 2)
         letter_y = self.HEIGHT - (2 * self.GAP + 4 * self.RADIUS)
         char = 65
